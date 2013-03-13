@@ -6,7 +6,9 @@ public class ChessSquare {
 	private char xPosChar;
 	private ChessPiece myPiece=null;
 	private boolean iAmWhite;
-	public ChessSquare(int x, int y){
+	ChessBoard myBoard;
+	public ChessSquare(ChessBoard board, int x, int y){
+		myBoard=board;
 		xPos=x;
 		yPos=y;
 		switch (xPos){
@@ -34,7 +36,7 @@ public class ChessSquare {
 		boolean icanprint=true;
 		
 		if (myPiece!=null){
-			myPiece.printYourself();
+			System.out.print(myPiece.stringRep());
 		}else{
 			icanprint=false;
 		}
@@ -49,6 +51,15 @@ public class ChessSquare {
 	}
 	public boolean isWhite(){
 		return iAmWhite;
+	}
+	public int getX(){
+		return xPos;
+	}
+	public int getY(){
+		return yPos;
+	}
+	public ChessPiece getPiece(){
+		return myPiece;
 	}
 }
 

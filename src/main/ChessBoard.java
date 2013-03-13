@@ -1,13 +1,16 @@
 package main;
 
+import java.util.Vector;
+
 public class ChessBoard {
 	ChessSquare[][] squaresArray=new ChessSquare[8][8];
+	Vector<ChessPiece> deadPieces=new Vector<ChessPiece>();
 	public ChessBoard(){
 	}
 	public void populateBoard(){
 		for(int i=0;i<8;i++){
 			for(int j=0;j<8;j++){
-				squaresArray[i][j]=new ChessSquare(i,j);
+				squaresArray[i][j]=new ChessSquare(this,i,j);
 				if(j==1){
 					squaresArray[i][j].setPiece(new PiecePawn(i,'W'));
 				}else if(j==6){
@@ -69,7 +72,9 @@ public class ChessBoard {
 				}else if(i%2==1 && j%2==1){
 					squaresArray[i][j].setWhite(true);
 				}
-				
+				if(squaresArray[i][j].getPiece()!=null){
+					squaresArray[i][j].getPiece().setBoard(this);
+				}
 			}
 		}
 	}
@@ -123,6 +128,48 @@ public class ChessBoard {
 		}else{
 			System.out.println(" |.....|     |.....|     |.....|     |.....|     |");
 		}
+	}
+	ChessSquare getSquareAt(int x, int y){
+		if(x<7&&x>0&&y<7&&y>0){
+			return squaresArray[y][x];	
+		}else{
+			return null;
+		}
+		
+	}
+	boolean movePiece(String rep, int x, int y){
+		ChessPiece pieceToMove=null;
+		boolean foundPiece=false;
+		for (int i=0;i<8;i++){
+			if(!foundPiece){
+				for (int j=0;j<8;j++){
+					if(squaresArray[j][i].getPiece()!=null){
+						//System.out.println(rep+" == "+squaresArray[j][i].getPiece().stringRep()+",which is at "+j+","+i+" ??");
+						if(rep.equals(squaresArray[j][i].getPiece().stringRep())){
+							pieceToMove=squaresArray[j][i].getPiece();
+							foundPiece=true;
+							x=j;
+							y=i;
+							break;
+						}
+					}
+				}
+			}
+		}
+		if(!foundPiece){
+			System.out.println("Could not find piece.");
+			return false;
+		}else{
+			
+			if(pieceToMove.moveTo(squaresArray[y][x])){
+				System.out.println(rep+" moved to "+x+","+y);
+			}else{
+				System.out.println("Could not move"+rep+" to "+x+","+y);
+			}
+		}
+		
+		
+		return false;
 	}
 	
 }
