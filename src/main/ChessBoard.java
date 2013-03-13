@@ -10,7 +10,7 @@ public class ChessBoard {
 	public void populateBoard(){
 		for(int i=0;i<8;i++){
 			for(int j=0;j<8;j++){
-				squaresArray[i][j]=new ChessSquare(this,i,j);
+				squaresArray[i][j]=new ChessSquare(this,j,i);
 				if(j==1){
 					squaresArray[i][j].setPiece(new PiecePawn(i,'W'));
 				}else if(j==6){
@@ -138,18 +138,20 @@ public class ChessBoard {
 		
 	}
 	boolean movePiece(String rep, int x, int y){
+		System.out.println("Board: Trying to move "+rep+" to "+x+","+y);
 		ChessPiece pieceToMove=null;
 		boolean foundPiece=false;
 		for (int i=0;i<8;i++){
 			if(!foundPiece){
 				for (int j=0;j<8;j++){
 					if(squaresArray[j][i].getPiece()!=null){
-						//System.out.println(rep+" == "+squaresArray[j][i].getPiece().stringRep()+",which is at "+j+","+i+" ??");
+						//System.out.println("Board: "+rep+" == "+squaresArray[j][i].getPiece().stringRep()+",which is at "+j+","+i+" ??");
 						if(rep.equals(squaresArray[j][i].getPiece().stringRep())){
+							//System.out.println("Board: Found piece "+squaresArray[j][i].getPiece().stringRep()+" at "+j+","+i);
 							pieceToMove=squaresArray[j][i].getPiece();
 							foundPiece=true;
-							x=j;
-							y=i;
+							//x=j;
+							//y=i;
 							break;
 						}
 					}
@@ -162,9 +164,9 @@ public class ChessBoard {
 		}else{
 			
 			if(pieceToMove.moveTo(squaresArray[y][x])){
-				System.out.println(rep+" moved to "+x+","+y);
+				System.out.println("Board: "+rep+" moved to "+x+","+y);
 			}else{
-				System.out.println("Could not move"+rep+" to "+x+","+y);
+				System.out.println("Board: Could not move "+rep+" to "+x+","+y);
 			}
 		}
 		

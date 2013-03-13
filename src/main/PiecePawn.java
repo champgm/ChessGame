@@ -10,16 +10,21 @@ public class PiecePawn extends ChessPiece{
 		super('P',number,color);
 	}
 	boolean moveTo(ChessSquare newSquare){
-		if(canMoveTo(newSquare)){
-			mySquare.setPiece(null);
-			if(newSquare.getPiece()!=null){
-				myBoard.deadPieces.add(newSquare.getPiece());
+		if(newSquare!=null){
+			if(canMoveTo(newSquare)){
+				mySquare.setPiece(null);
+				if(newSquare.getPiece()!=null){
+					myBoard.deadPieces.add(newSquare.getPiece());
+				}
+				newSquare.setPiece(this);
+				return true;
+			}else{
+				System.out.println("Piece: Could not move to "+newSquare.getX()+","+newSquare.getY());
+				return false;
 			}
-			newSquare.setPiece(this);
-			return true;
-		}else{
-			return false;
 		}
+		System.out.println("Piece: That square doesn't exist.");
+		return false;
 	}
 	boolean canMoveTo(ChessSquare newSquare){
 		Vector<ChessSquare> possibleMoves=calcPossibleMoves();
@@ -44,8 +49,11 @@ public class PiecePawn extends ChessPiece{
 				validY=3;
 			}
 			possibleSquare=myBoard.getSquareAt(validX, validY);
-			if(possibleSquare.getPiece()==null){
-				possibleMoves.add(possibleSquare);
+			
+			if(possibleSquare!=null){
+				if(possibleSquare.getPiece()!=null){
+					possibleMoves.add(possibleSquare);
+				}
 			}
 		}
 		validX=xPos;
@@ -55,8 +63,10 @@ public class PiecePawn extends ChessPiece{
 			validY=yPos+1;
 		}
 		possibleSquare=myBoard.getSquareAt(validX, validY);
-		if(possibleSquare.getPiece()==null){
-			possibleMoves.add(possibleSquare);
+		if(possibleSquare!=null){
+			if(possibleSquare.getPiece()!=null){
+				possibleMoves.add(possibleSquare);
+			}
 		}
 		for(int i=-1;i<2;i+=2){
 			validX=xPos+i;
@@ -66,9 +76,11 @@ public class PiecePawn extends ChessPiece{
 				validY=yPos+1;
 			}
 			possibleSquare=myBoard.getSquareAt(validX, validY);
-			if(possibleSquare.getPiece()!=null){
-				if(possibleSquare.getPiece().getColor()!=myColor){
-					possibleMoves.add(possibleSquare);
+			if(possibleSquare!=null){
+				if(possibleSquare.getPiece()!=null){
+					if(possibleSquare.getPiece().getColor()!=myColor){
+						possibleMoves.add(possibleSquare);
+					}
 				}
 			}
 		}

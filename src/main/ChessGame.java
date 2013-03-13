@@ -25,8 +25,8 @@ public class ChessGame {
 			e.printStackTrace();
 		}
 		String pieceRep=command.substring(0,3);
-		int x=(int)command.charAt(7);
-		int y=(int)command.charAt(9);
+		int x=Character.getNumericValue(command.charAt(7));
+		int y=Character.getNumericValue(command.charAt(9));
 		chessBoard.movePiece(pieceRep,x,y);
 		
 		
