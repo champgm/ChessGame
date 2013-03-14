@@ -3,7 +3,7 @@ ChessGame
 
 Why do people keep asking me how I would make a chess game?
 
-```objc
+```
  |_____|_____|_____|_____|_____|_____|_____|_____| 
  |.....|     |.....|     |.....|     |.....|     | 
 7|.R1B.| N1B |.B1B.| K1B |.Q1B.| B0B |.N0B.| R0B | 
