@@ -1,5 +1,4 @@
 package main;
-import java.util.Iterator;
 import java.util.Vector;
 
 
@@ -16,7 +15,7 @@ public class PiecePawn extends ChessPiece{
 		if(newSquare!=null){
 			if(canMoveTo(newSquare)){
 				mySquare.setPiece(null);
-				if(newSquare.getPiece()!=null){
+				if(!newSquare.isEmpty()){
 					myBoard.deadPieces.add(newSquare.getPiece());
 				}
 				newSquare.setPiece(this);
@@ -31,20 +30,17 @@ public class PiecePawn extends ChessPiece{
 	}
 	boolean canMoveTo(ChessSquare newSquare){
 		Vector<ChessSquare> possibleMoves=calcPossibleMoves();
-		Iterator<ChessSquare> iterator=possibleMoves.iterator();
-		while(iterator.hasNext()){
-			if(iterator.next().equals(newSquare)){
-				
-				return true;
-			}
+		if(possibleMoves.contains(newSquare)){
+			return true;
 		}	
 		return false;
 	}
 	Vector<ChessSquare> calcPossibleMoves(){
-		Vector<ChessSquare> possibleMoves=new Vector<ChessSquare>();
-		ChessSquare possibleSquare;
 		int validX=0;
 		int validY=0;
+		Vector<ChessSquare> possibleMoves=new Vector<ChessSquare>();
+		ChessSquare possibleSquare;
+		System.out.println("Pawn: Calculating possible moves from "+xPos+","+yPos);
 		if(!hasMoved){
 			validX=xPos;
 			if(myColor=='B'){
@@ -56,7 +52,7 @@ public class PiecePawn extends ChessPiece{
 			possibleSquare=myBoard.getSquareAt(validX, validY);
 			if(possibleSquare!=null){
 				System.out.println("Pawn: I haven't moved yet, so "+validX+","+validY+" is a valid move");
-				if(possibleSquare.getPiece()!=null){
+				if(possibleSquare.isEmpty()){
 					possibleMoves.add(possibleSquare);
 					System.out.println("Pawn: Adding that square to the possibles list.");
 				}else{
@@ -74,7 +70,7 @@ public class PiecePawn extends ChessPiece{
 		possibleSquare=myBoard.getSquareAt(validX, validY);
 		if(possibleSquare!=null){
 			System.out.println("Pawn: "+validX+","+validY+" is a valid move");
-			if(possibleSquare.getPiece()==null){
+			if(possibleSquare.isEmpty()){
 				System.out.println("Pawn: And it's empty, adding that square to the possibles list.");
 				possibleMoves.add(possibleSquare);
 			}else{
@@ -92,7 +88,7 @@ public class PiecePawn extends ChessPiece{
 			possibleSquare=myBoard.getSquareAt(validX, validY);
 			if(possibleSquare!=null){
 				System.out.println("Pawn: Attacking? "+validX+","+validY+" is a valid attack move");
-				if(possibleSquare.getPiece()!=null){
+				if(!possibleSquare.isEmpty()){
 					System.out.println("Pawn: And there is something there to attack...");
 					if(possibleSquare.getPiece().getColor()!=myColor){
 						System.out.println("Pawn: And there it's an enemy!");

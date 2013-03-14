@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ChessGame {
+	static boolean quit=false;
 	static ChessBoard aChessBoard=null;
 	public static void main(String[] args){
 		aChessBoard=new ChessBoard();
 		aChessBoard.populateBoard();	
-		while(true){
+		while(!quit){
 			interact(aChessBoard);
 		}
 	}
@@ -27,13 +28,13 @@ public class ChessGame {
 		}
 		if(command.equals("printpieces")){
 			aChessBoard.printPieces();
+		}else if(command.equals("printpieces")){
+			quit=true;
 		}else{
 			String pieceRep=command.substring(0,3);
 			int x=Character.getNumericValue(command.charAt(7));
 			int y=Character.getNumericValue(command.charAt(9));
 			chessBoard.movePiece(pieceRep,x,y);
 		}
-		
-		
 	}
 }

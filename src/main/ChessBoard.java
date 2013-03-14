@@ -10,7 +10,8 @@ public class ChessBoard {
 	public void populateBoard(){
 		for(int i=0;i<8;i++){
 			for(int j=0;j<8;j++){
-				squaresArray[i][j]=new ChessSquare(this,j,i);
+				squaresArray[i][j]=new ChessSquare(this,i,j);
+				squaresArray[i][j].setPiece(null);
 				if(j==1){
 					squaresArray[i][j].setPiece(new PiecePawn(i,'W'));
 				}else if(j==6){
@@ -137,7 +138,7 @@ public class ChessBoard {
 		System.out.println("Board: You are requesting square at "+x+","+y);
 		if(x<7&&x>-1&&y<7&&y>-1){
 			System.out.println("Board: That square seems ok.");
-			return squaresArray[y][x];	
+			return squaresArray[x][y];	
 		}else{
 			System.out.println("Board: ... but that suqare is off of the board.");
 			return null;
@@ -151,11 +152,11 @@ public class ChessBoard {
 		for (int i=0;i<8;i++){
 			if(!foundPiece){
 				for (int j=0;j<8;j++){
-					if(squaresArray[j][i].getPiece()!=null){
+					if(squaresArray[i][j].getPiece()!=null){
 						//System.out.println("Board: "+rep+" == "+squaresArray[j][i].getPiece().stringRep()+",which is at "+j+","+i+" ??");
-						if(rep.equals(squaresArray[j][i].getPiece().stringRep())){
+						if(rep.equals(squaresArray[i][j].getPiece().stringRep())){
 							//System.out.println("Board: Found piece "+squaresArray[j][i].getPiece().stringRep()+" at "+j+","+i);
-							pieceToMove=squaresArray[j][i].getPiece();
+							pieceToMove=squaresArray[i][j].getPiece();
 							foundPiece=true;
 							//x=j;
 							//y=i;
@@ -170,14 +171,13 @@ public class ChessBoard {
 			return false;
 		}else{
 			
-			if(pieceToMove.moveTo(squaresArray[y][x])){
+			if(pieceToMove.moveTo(squaresArray[x][y])){
 				System.out.println("Board: "+rep+" moved to "+x+","+y);
+				return true;
 			}else{
 				System.out.println("Board: Could not move "+rep+" to "+x+","+y);
 			}
 		}
-		
-		
 		return false;
 	}
 	

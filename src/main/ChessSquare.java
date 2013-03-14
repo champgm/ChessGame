@@ -63,6 +63,12 @@ public class ChessSquare {
 	public ChessPiece getPiece(){
 		return myPiece;
 	}
+	public boolean isEmpty(){
+		if(myPiece==null){
+			return true;
+		}
+		return false;
+	}
 }
 
 
