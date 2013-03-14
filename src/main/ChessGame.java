@@ -8,13 +8,13 @@ public class ChessGame {
 	static ChessBoard aChessBoard=null;
 	public static void main(String[] args){
 		aChessBoard=new ChessBoard();
-		aChessBoard.populateBoard();
-		aChessBoard.drawYourself();
+		aChessBoard.populateBoard();	
 		while(true){
 			interact(aChessBoard);
 		}
 	}
 	public static void interact(ChessBoard chessBoard){
+		aChessBoard.drawYourself();
 		System.out.print("Move (T#C to X,Y): ");
 		String command="";
 		try{

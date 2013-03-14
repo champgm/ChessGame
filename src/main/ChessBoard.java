@@ -134,9 +134,12 @@ public class ChessBoard {
 		}
 	}
 	ChessSquare getSquareAt(int x, int y){
-		if(x<7&&x>0&&y<7&&y>0){
+		System.out.println("Board: You are requesting square at "+x+","+y);
+		if(x<7&&x>-1&&y<7&&y>-1){
+			System.out.println("Board: That square seems ok.");
 			return squaresArray[y][x];	
 		}else{
+			System.out.println("Board: ... but that suqare is off of the board.");
 			return null;
 		}
 		
