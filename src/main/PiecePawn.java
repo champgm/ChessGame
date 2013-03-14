@@ -9,16 +9,17 @@ public class PiecePawn extends ChessPiece{
 		super('P',number,color);
 	}
 	boolean moveTo(ChessSquare newSquare){
-		//ahhh shit, implement this later:
-		//Pawns may not use the initial two-square advance to jump over an occupied square, or to capture. 
-		System.out.println("Piece: I am currently at "+mySquare.getX()+","+mySquare.getY());
+ 
+		System.out.println("Piece: I am currently at "+xPos+","+yPos);
 		if(newSquare!=null){
 			if(canMoveTo(newSquare)){
 				mySquare.setPiece(null);
 				if(!newSquare.isEmpty()){
 					myBoard.deadPieces.add(newSquare.getPiece());
+					System.out.println("Piece: Killed piece at "+newSquare.getX()+","+newSquare.getY());
 				}
 				newSquare.setPiece(this);
+				mySquare=newSquare;
 				return true;
 			}else{
 				System.out.println("Piece: Could not move to "+newSquare.getX()+","+newSquare.getY());
@@ -35,48 +36,65 @@ public class PiecePawn extends ChessPiece{
 		}	
 		return false;
 	}
+	String whatsAtSquare(int x, int y){
+		ChessSquare possibleSquare;
+		System.out.println("Pawn: Looking at "+x+","+y+"...");
+		possibleSquare=myBoard.getSquareAt(x, y);
+		if(possibleSquare!=null){
+			if(possibleSquare.isEmpty()){
+				System.out.println("Pawn: Square is empty");
+				return "empty";
+			}else{
+				System.out.println("Pawn: Square is occupied");
+				return "occupied";
+			}
+		}else{
+			System.out.println("Pawn: Square off-board");
+			return "null";
+		}
+		
+	}
 	Vector<ChessSquare> calcPossibleMoves(){
 		int validX=0;
 		int validY=0;
 		Vector<ChessSquare> possibleMoves=new Vector<ChessSquare>();
-		ChessSquare possibleSquare;
 		System.out.println("Pawn: Calculating possible moves from "+xPos+","+yPos);
 		if(!hasMoved){
+			//Pawns may not use the initial two-square advance to jump over an occupied square, or to capture.
+			int intermediateY=0;
 			validX=xPos;
 			if(myColor=='B'){
 				validY=4;
+				intermediateY=5;
 			}else{
 				validY=3;
+				intermediateY=2;
 			}
-			System.out.println("Pawn: Looking at "+validX+","+validY+"...");
-			possibleSquare=myBoard.getSquareAt(validX, validY);
-			if(possibleSquare!=null){
-				System.out.println("Pawn: I haven't moved yet, so "+validX+","+validY+" is a valid move");
-				if(possibleSquare.isEmpty()){
-					possibleMoves.add(possibleSquare);
-					System.out.println("Pawn: Adding that square to the possibles list.");
+			if(whatsAtSquare(validX,validY).equals("empty")){
+				if(whatsAtSquare(validX,intermediateY).equals("empty")){
+					System.out.println("Pawn: Adding square at "+validX+","+validY+" to possible moves list.");
+					possibleMoves.add(myBoard.getSquareAt(validX, validY));
 				}else{
-					System.out.println("Pawn: But there's something already there");
+					System.out.println("Pawn: Something is between me and there.");
 				}
+			}else{
+				System.out.println("Pawn: Not a valid move.");
 			}
 		}
+		
 		validX=xPos;
 		if(myColor=='B'){
 			validY=yPos-1;
 		}else{
 			validY=yPos+1;
 		}
-		System.out.println("Pawn: Looking at "+validX+","+validY+"...");
-		possibleSquare=myBoard.getSquareAt(validX, validY);
-		if(possibleSquare!=null){
-			System.out.println("Pawn: "+validX+","+validY+" is a valid move");
-			if(possibleSquare.isEmpty()){
-				System.out.println("Pawn: And it's empty, adding that square to the possibles list.");
-				possibleMoves.add(possibleSquare);
-			}else{
-				System.out.println("Pawn: But there's something already there");
-			}
+		if(whatsAtSquare(validX,validY).equals("empty")){
+			System.out.println("Pawn: Adding square at "+validX+","+validY+" to possible moves list.");
+			possibleMoves.add(myBoard.getSquareAt(validX, validY));
+		}else{
+			System.out.println("Pawn: Not a valid move.");
 		}
+		
 		for(int i=-1;i<2;i+=2){
 			validX=xPos+i;
 			if(myColor=='B'){
@@ -84,19 +102,11 @@ public class PiecePawn extends ChessPiece{
 			}else{
 				validY=yPos+1;
 			}
-			System.out.println("Pawn: Looking at "+validX+","+validY+"...");
-			possibleSquare=myBoard.getSquareAt(validX, validY);
-			if(possibleSquare!=null){
-				System.out.println("Pawn: Attacking? "+validX+","+validY+" is a valid attack move");
-				if(!possibleSquare.isEmpty()){
-					System.out.println("Pawn: And there is something there to attack...");
-					if(possibleSquare.getPiece().getColor()!=myColor){
-						System.out.println("Pawn: And there it's an enemy!");
-						possibleMoves.add(possibleSquare);
-					}else{
-						System.out.println("Pawn: But it's one of our guys.");
-					}
-				}
+			if(whatsAtSquare(validX,validY).equals("occupied")){
+				System.out.println("Pawn: Adding square at "+validX+","+validY+" to possible attack moves list.");
+				possibleMoves.add(myBoard.getSquareAt(validX, validY));
+			}else{
+				System.out.println("Pawn: Not a valid attack move.");
 			}
 		}
 		return possibleMoves;

@@ -47,6 +47,9 @@ public class ChessSquare {
 	}
 	public void setPiece(ChessPiece newPiece){
 		myPiece=newPiece;
+		if(myPiece!=null){
+			myPiece.setPos(xPos,yPos);
+		}
 	}
 	public void setWhite(boolean isWhite){
 		iAmWhite=isWhite;
