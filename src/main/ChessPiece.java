@@ -24,18 +24,17 @@ public abstract class ChessPiece {
 	
 	String whatsAtSquare(int x, int y){
 		ChessSquare possibleSquare;
-		System.out.println("Piece: Looking at "+x+","+y+"...");
 		possibleSquare=myBoard.getSquareAt(x, y);
 		if(possibleSquare!=null){
 			if(possibleSquare.isEmpty()){
-				System.out.println("Piece: Square is empty");
+				System.out.println("Piece: Square "+x+","+y+" is empty");
 				return "empty";
 			}else{
-				System.out.println("Piece: Square is occupied");
+				System.out.println("Piece: Square "+x+","+y+" is occupied");
 				return "occupied";
 			}
 		}else{
-			System.out.println("Piece: Square off-board");
+			System.out.println("Piece: Square "+x+","+y+" is off-board");
 			return "null";
 		}
 	}
@@ -67,6 +66,7 @@ public abstract class ChessPiece {
 		myNumber=number;
 		myColor=color;
 	}
+
 	
 	String stringRep(){
 		String representation="";
@@ -100,4 +100,6 @@ public abstract class ChessPiece {
 	int getY(){
 		return yPos;
 	}
+
+
 }

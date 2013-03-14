@@ -49,10 +49,12 @@ public class PiecePawn extends ChessPiece{
 				}else{
 					System.out.println("Pawn: Friendly there.");
 				}
-			}else{
-				System.out.println("Pawn: Square is empty.");
+				}else{
+					System.out.println("Pawn: Square is empty.");
+				}
+		
 			}
-		}
 		return possibleMoves;
 	}
+	
 }
