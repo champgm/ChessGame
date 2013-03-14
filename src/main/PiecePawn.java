@@ -10,6 +10,7 @@ public class PiecePawn extends ChessPiece{
 		super('P',number,color);
 	}
 	boolean moveTo(ChessSquare newSquare){
+		System.out.println("Piece: I am currently at "+mySquare.getX()+","+mySquare.getY());
 		if(newSquare!=null){
 			if(canMoveTo(newSquare)){
 				mySquare.setPiece(null);
@@ -49,10 +50,12 @@ public class PiecePawn extends ChessPiece{
 				validY=3;
 			}
 			possibleSquare=myBoard.getSquareAt(validX, validY);
-			
 			if(possibleSquare!=null){
+				System.out.println("Pawn: I haven't moved yet, so "+validX+","+validY+" is a valid move");
 				if(possibleSquare.getPiece()!=null){
 					possibleMoves.add(possibleSquare);
+				}else{
+					System.out.println("Pawn: But there's something already there");
 				}
 			}
 		}
@@ -62,9 +65,12 @@ public class PiecePawn extends ChessPiece{
 		}else{
 			validY=yPos+1;
 		}
+		
 		possibleSquare=myBoard.getSquareAt(validX, validY);
 		if(possibleSquare!=null){
+			System.out.println("Pawn: "+validX+","+validY+" is a valid move");
 			if(possibleSquare.getPiece()!=null){
+				System.out.println("Pawn: But there's something already there");
 				possibleMoves.add(possibleSquare);
 			}
 		}
@@ -75,11 +81,17 @@ public class PiecePawn extends ChessPiece{
 			}else{
 				validY=yPos+1;
 			}
+			
 			possibleSquare=myBoard.getSquareAt(validX, validY);
 			if(possibleSquare!=null){
+				System.out.println("Pawn: Attacking? "+validX+","+validY+" is a valid attack move");
 				if(possibleSquare.getPiece()!=null){
+					System.out.println("Pawn: And there is something there to attack...");
 					if(possibleSquare.getPiece().getColor()!=myColor){
+						System.out.println("Pawn: And there it's an enemy!");
 						possibleMoves.add(possibleSquare);
+					}else{
+						System.out.println("Pawn: But it's one of our guys.");
 					}
 				}
 			}

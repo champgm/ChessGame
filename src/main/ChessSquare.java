@@ -34,11 +34,14 @@ public class ChessSquare {
 	}
 	public boolean printYourself(){
 		boolean icanprint=true;
-		
 		if (myPiece!=null){
 			System.out.print(myPiece.stringRep());
 		}else{
-			icanprint=false;
+			if(iAmWhite){
+				System.out.print("   ");
+			}else{
+				System.out.print("...");
+			}
 		}
 		return icanprint;
 	}

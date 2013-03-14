@@ -36,6 +36,13 @@ public abstract class ChessPiece {
 	char getColor(){
 		return myColor;
 	}
+	int getX(){
+		return xPos;
+	}
+	int getY(){
+		return yPos;
+	}
+	
 	
 	
 }

@@ -74,6 +74,8 @@ public class ChessBoard {
 				}
 				if(squaresArray[i][j].getPiece()!=null){
 					squaresArray[i][j].getPiece().setBoard(this);
+					squaresArray[i][j].getPiece().setSquare(squaresArray[i][j]);
+					squaresArray[i][j].getPiece().setPos(i,j);
 				}
 			}
 		}
@@ -93,6 +95,15 @@ public class ChessBoard {
 		System.out.println(" |_____|_____|_____|_____|_____|_____|_____|_____| ");
 		System.out.println("    0     1     2     3     4     5     6     7    ");
 	}
+	public void printPieces(){
+		for (int i=0;i<8;i++){
+			for (int j=0;j<8;j++){
+				System.out.print("Piece at "+i+","+j+": ");
+				squaresArray[i][j].printYourself();
+				System.out.println("");
+			}
+		}
+	}
 	void printRowWithPieces(boolean firstSquareIsWhite,int row){
 		int j=row;
 		System.out.print(row);
@@ -103,14 +114,7 @@ public class ChessBoard {
 			}else{
 				System.out.print(".");
 			}
-			if(squaresArray[i][j].printYourself()){
-			}else{
-				if(squaresArray[i][j].isWhite()){
-					System.out.print("   ");
-				}else{
-					System.out.print("...");
-				}
-			}
+			squaresArray[i][j].printYourself();
 			if(squaresArray[i][j].isWhite()){
 				System.out.print(" |");
 			}else{

@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ChessGame {
+	static ChessBoard aChessBoard=null;
 	public static void main(String[] args){
-		ChessBoard aChessBoard=new ChessBoard();
+		aChessBoard=new ChessBoard();
 		aChessBoard.populateBoard();
 		aChessBoard.drawYourself();
 		while(true){
@@ -24,11 +25,14 @@ public class ChessGame {
 		{
 			e.printStackTrace();
 		}
-		String pieceRep=command.substring(0,3);
-		int x=Character.getNumericValue(command.charAt(7));
-		int y=Character.getNumericValue(command.charAt(9));
-		chessBoard.movePiece(pieceRep,x,y);
-		
+		if(command.equals("printpieces")){
+			aChessBoard.printPieces();
+		}else{
+			String pieceRep=command.substring(0,3);
+			int x=Character.getNumericValue(command.charAt(7));
+			int y=Character.getNumericValue(command.charAt(9));
+			chessBoard.movePiece(pieceRep,x,y);
+		}
 		
 		
 	}
