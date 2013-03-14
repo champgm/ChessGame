@@ -4,57 +4,11 @@ import java.util.Vector;
 
 
 public class PiecePawn extends ChessPiece{
-	boolean hasMoved=false;
+	//boolean hasMoved=false;
 	PiecePawn(int number, char color){
 		super('P',number,color);
 	}
-	boolean moveTo(ChessSquare newSquare){
- 
-		System.out.println("Piece: I am currently at "+xPos+","+yPos);
-		if(newSquare!=null){
-			if(canMoveTo(newSquare)){
-				mySquare.setPiece(null);
-				if(!newSquare.isEmpty()){
-					myBoard.deadPieces.add(newSquare.getPiece());
-					System.out.println("Piece: Killed piece at "+newSquare.getX()+","+newSquare.getY());
-				}
-				newSquare.setPiece(this);
-				mySquare=newSquare;
-				hasMoved=true;
-				return true;
-			}else{
-				System.out.println("Piece: Could not move to "+newSquare.getX()+","+newSquare.getY());
-				return false;
-			}
-		}
-		System.out.println("Piece: That square doesn't exist.");
-		return false;
-	}
-	boolean canMoveTo(ChessSquare newSquare){
-		Vector<ChessSquare> possibleMoves=calcPossibleMoves();
-		if(possibleMoves.contains(newSquare)){
-			return true;
-		}	
-		return false;
-	}
-	String whatsAtSquare(int x, int y){
-		ChessSquare possibleSquare;
-		System.out.println("Pawn: Looking at "+x+","+y+"...");
-		possibleSquare=myBoard.getSquareAt(x, y);
-		if(possibleSquare!=null){
-			if(possibleSquare.isEmpty()){
-				System.out.println("Pawn: Square is empty");
-				return "empty";
-			}else{
-				System.out.println("Pawn: Square is occupied");
-				return "occupied";
-			}
-		}else{
-			System.out.println("Pawn: Square off-board");
-			return "null";
-		}
-		
-	}
+
 	Vector<ChessSquare> calcPossibleMoves(){
 		System.out.println("Pawn: Calculating possible moves from "+xPos+","+yPos);
 		Vector<ChessSquare> possibleMoves=new Vector<ChessSquare>();
