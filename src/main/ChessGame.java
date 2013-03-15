@@ -38,7 +38,7 @@ public class ChessGame {
 			chessBoard.movePiece(pieceRep,x,y);
 			}
 			catch(StringIndexOutOfBoundsException SIOOBE){
-				System.out.println("Wait... What? I don't even...");
+				System.out.println("Wait... What? I don't even... Improper format maybe?");
 			}
 		}
 	}
