@@ -21,8 +21,30 @@ public abstract class ChessPiece {
 		}	
 		return false;
 	}
-	Boolean[] EmptyEnemy(int x, int y){
-		Boolean[] emptyEnemy={false,false};
+	boolean[] ValidBreak(int x, int y){
+		//this function is for pieces which have long, linear ranges
+		//possible results for this are
+		//10
+		//11
+		//01
+		boolean[] validBreak={false,false};
+		boolean[] loopEE=EmptyEnemy(x,y);
+		if(loopEE[0]){
+			System.out.println("Piece: "+x+","+y+" is empty.");
+			validBreak[0]=true;
+		}else if(loopEE[1]){
+			System.out.println("Piece: "+x+","+y+" is occupied by enemy.");
+			validBreak[0]=true;
+			validBreak[1]=true;
+		}else{
+			System.out.println("Piece: "+x+","+y+" is occupied by friendly.");
+			validBreak[0]=false;
+			validBreak[1]=true;
+		}
+		return validBreak;
+	}
+	boolean[] EmptyEnemy(int x, int y){
+		boolean[] emptyEnemy={false,false};
 		System.out.println("Piece: EmptyEnemy on "+x+","+y);
 		String target=whatsAtSquare(x,y);
 		switch(target){

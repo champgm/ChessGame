@@ -24,8 +24,8 @@ public class PiecePawn extends ChessPiece{
 			farY=3;
 		}
 		//forward movement
-		Boolean[] adjacentEE=EmptyEnemy(xPos,adjacentY);
-		Boolean[] farEE=EmptyEnemy(xPos,farY);
+		boolean[] adjacentEE=EmptyEnemy(xPos,adjacentY);
+		boolean[] farEE=EmptyEnemy(xPos,farY);
 		if(adjacentEE[0]){
 			System.out.println("Pawn: Adding square at "+xPos+","+adjacentY+" to possible moves list.");
 			possibleMoves.add(myBoard.getSquareAt(xPos, adjacentY));
@@ -41,7 +41,7 @@ public class PiecePawn extends ChessPiece{
 		int testX=xPos;
 		for(int i=-1;i<2;i+=2){
 			testX=xPos+i;
-			Boolean[] attackEE=EmptyEnemy(testX,adjacentY);
+			boolean[] attackEE=EmptyEnemy(testX,adjacentY);
 			if(!attackEE[0]){
 				if(attackEE[1]){
 					System.out.println("Pawn: Enemy there, adding square at "+testX+","+adjacentY+" to possible attack moves list.");

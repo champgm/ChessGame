@@ -10,23 +10,7 @@ public class PieceRook extends ChessPiece{
 		
 		return false;
 	}
-	Boolean[] ValidBreak(int x, int y){
-		Boolean[] validBreak={false,false};
-		Boolean[] loopEE=EmptyEnemy(x,y);
-		if(loopEE[0]){
-			System.out.println("Piece: "+x+","+y+" is empty.");
-			validBreak[0]=true;
-		}else if(loopEE[1]){
-			System.out.println("Piece: "+x+","+y+" is occupied by enemy.");
-			validBreak[0]=true;
-			validBreak[1]=true;
-		}else{
-			System.out.println("Piece: "+x+","+y+" is occupied by friendly.");
-			validBreak[0]=false;
-			validBreak[1]=true;
-		}
-		return validBreak;
-	}
+
 	@Override
 	Vector<ChessSquare> calcPossibleMoves() {
 		System.out.println("Rook: Calculating possible moves from "+xPos+","+yPos);
@@ -36,16 +20,13 @@ public class PieceRook extends ChessPiece{
 			int x=i;
 			int y=yPos;
 			System.out.println("Rook: loop1 checking "+x+","+y);
-			Boolean[] loopEE=EmptyEnemy(x,y);
-			if(loopEE[0]){
-				System.out.println("Piece: "+x+","+y+" is empty.");
+			boolean[] validBreak=ValidBreak(x,y);
+			if(validBreak[0]){
 				possibleMoves.add(myBoard.getSquareAt(x, y));
-			}else if(loopEE[1]){
-				System.out.println("Piece: "+x+","+y+" is occupied by enemy.");
-				possibleMoves.add(myBoard.getSquareAt(x, y));
-				break;
+				if(validBreak[1]){
+					break;
+				}
 			}else{
-				System.out.println("Piece: "+x+","+y+" is occupied by friendly.");
 				break;
 			}
 		}
@@ -54,16 +35,13 @@ public class PieceRook extends ChessPiece{
 			int x=i;
 			int y=yPos;
 			System.out.println("Rook: loop2 checking "+x+","+y);
-			Boolean[] loopEE=EmptyEnemy(x,y);
-			if(loopEE[0]){
-				System.out.println("Piece: "+x+","+y+" is empty.");
+			boolean[] validBreak=ValidBreak(x,y);
+			if(validBreak[0]){
 				possibleMoves.add(myBoard.getSquareAt(x, y));
-			}else if(loopEE[1]){
-				System.out.println("Piece: "+x+","+y+" is occupied by enemy.");
-				possibleMoves.add(myBoard.getSquareAt(x, y));
-				break;
+				if(validBreak[1]){
+					break;
+				}
 			}else{
-				System.out.println("Piece: "+x+","+y+" is occupied by friendly.");
 				break;
 			}
 		}
@@ -72,16 +50,13 @@ public class PieceRook extends ChessPiece{
 			int x=xPos;
 			int y=i;
 			System.out.println("Rook: loop3 checking "+x+","+y);
-			Boolean[] loopEE=EmptyEnemy(x,y);
-			if(loopEE[0]){
-				System.out.println("Piece: "+x+","+y+" is empty.");
+			boolean[] validBreak=ValidBreak(x,y);
+			if(validBreak[0]){
 				possibleMoves.add(myBoard.getSquareAt(x, y));
-			}else if(loopEE[1]){
-				System.out.println("Piece: "+x+","+y+" is occupied by enemy.");
-				possibleMoves.add(myBoard.getSquareAt(x, y));
-				break;
+				if(validBreak[1]){
+					break;
+				}
 			}else{
-				System.out.println("Piece: "+x+","+y+" is occupied by friendly.");
 				break;
 			}
 		}
@@ -90,16 +65,13 @@ public class PieceRook extends ChessPiece{
 			int x=xPos;
 			int y=i;
 			System.out.println("Rook: loop4 checking "+x+","+y);
-			Boolean[] loopEE=EmptyEnemy(x,y);
-			if(loopEE[0]){
-				System.out.println("Piece: "+x+","+y+" is empty.");
+			boolean[] validBreak=ValidBreak(x,y);
+			if(validBreak[0]){
 				possibleMoves.add(myBoard.getSquareAt(x, y));
-			}else if(loopEE[1]){
-				System.out.println("Piece: "+x+","+y+" is occupied by enemy.");
-				possibleMoves.add(myBoard.getSquareAt(x, y));
-				break;
+				if(validBreak[1]){
+					break;
+				}
 			}else{
-				System.out.println("Piece: "+x+","+y+" is occupied by friendly.");
 				break;
 			}
 		}
