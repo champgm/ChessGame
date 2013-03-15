@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Vector;
+
 public class PieceBishop extends ChessPiece{
 	
 	PieceBishop(int number, char color){
@@ -19,5 +21,10 @@ public class PieceBishop extends ChessPiece{
 	boolean moveTo(ChessSquare newSquare) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	Vector<ChessSquare> calcPossibleMoves() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

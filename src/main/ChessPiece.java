@@ -21,7 +21,33 @@ public abstract class ChessPiece {
 		}	
 		return false;
 	}
+	Boolean[] EmptyEnemy(int x, int y){
+		Boolean[] emptyEnemy={false,false};
+		System.out.println("Piece: EmptyEnemy on "+x+","+y);
+		String target=whatsAtSquare(x,y);
+		switch(target){
+			case "empty":
+				System.out.println("Piece: "+x+","+y+" is empty.");
+				emptyEnemy[0]=true;
+				break;
+			case "occupied":
+				if(myBoard.getSquareAt(x, y).getPiece().getColor()!=myColor){
+					System.out.println("Piece: "+x+","+y+" is occupied by enemy.");
+					emptyEnemy[0]=false;
+					emptyEnemy[1]=true;
+					break;
+				}else{
+					System.out.println("Piece: "+x+","+y+" is occupied by friendly.");
+					emptyEnemy[0]=false;
+					emptyEnemy[1]=false;
+					break;
+				}
+			case "null":
+				System.out.println("Piece: looking at a square off board.");
+		}
 	
+		return emptyEnemy;
+	}
 	String whatsAtSquare(int x, int y){
 		ChessSquare possibleSquare;
 		possibleSquare=myBoard.getSquareAt(x, y);
