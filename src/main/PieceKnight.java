@@ -38,6 +38,6 @@ public class PieceKnight extends ChessPiece{
 				}
 			}
 		}
-	return null;
+	return possibleMoves;
 	}
 }
