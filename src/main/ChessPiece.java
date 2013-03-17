@@ -17,6 +17,7 @@ public abstract class ChessPiece {
 	boolean canMoveTo(ChessSquare newSquare){
 		Vector<ChessSquare> possibleMoves=calcPossibleMoves();
 		if(possibleMoves.contains(newSquare)){
+			System.out.println("Piece: "+newSquare.getX()+","+newSquare.getY()+" is possible.");
 			return true;
 		}	
 		return false;

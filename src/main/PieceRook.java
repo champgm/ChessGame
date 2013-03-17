@@ -6,11 +6,7 @@ public class PieceRook extends ChessPiece{
 	PieceRook(int number, char color){
 		super('R',number,color);
 	}
-	boolean testSquare(int x, int y){
-		
-		return false;
-	}
-
+	
 	@Override
 	Vector<ChessSquare> calcPossibleMoves() {
 		System.out.println("Rook: Calculating possible moves from "+xPos+","+yPos);
@@ -76,9 +72,5 @@ public class PieceRook extends ChessPiece{
 			}
 		}
 		return possibleMoves;
-	}
-	boolean squareOkay(int x,int y){
-		
-		return false;
 	}
 }

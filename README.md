@@ -3,6 +3,12 @@ ChessGame
 
 Why do people keep asking me how I would make a chess game?
 
+I was trying to see the forest last night and I came to the conclusion that this is a little conceptually messy. Should the pieces be able to tell if a square is EmptyEnemy, or should they rely on a square to get that information for it? The pieces don't need a pointer to the board, do they? They have one, and make use of it. 
+
+
+
+
+
 ```
  |_____|_____|_____|_____|_____|_____|_____|_____| 
  |.....|     |.....|     |.....|     |.....|     | 
