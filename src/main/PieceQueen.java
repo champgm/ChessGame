@@ -9,7 +9,11 @@ public class PieceQueen extends ChessPiece{
 
 	@Override
 	Vector<ChessSquare> calcPossibleMoves() {
-		// TODO Auto-generated method stub
-		return null;
+		Vector<ChessSquare> bishopTypes=calculateBishopTypeMovement();
+		Vector<ChessSquare> rookTypes=calculateRookTypeMovement();
+		Vector<ChessSquare> both=new Vector<ChessSquare>();
+		both.addAll(bishopTypes);
+		both.addAll(rookTypes);
+		return both;
 	}
 }

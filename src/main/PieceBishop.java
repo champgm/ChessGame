@@ -7,7 +7,13 @@ public class PieceBishop extends ChessPiece{
 	PieceBishop(int number, char color){
 		super('B',number,color);
 	}
-	
+	Vector<ChessSquare> calcPossibleMoves() {
+		System.out.println("Bishop: Calculating possible moves from "+xPos+","+yPos);
+		Vector<ChessSquare> possibleMoves=new Vector<ChessSquare>();
+		possibleMoves=calculateBishopTypeMovement();
+		return possibleMoves;
+	}
+	/*
 	@Override
 	Vector<ChessSquare> calcPossibleMoves() {
 		System.out.println("Bishop: Calculating possible moves from "+xPos+","+yPos);
@@ -75,5 +81,5 @@ public class PieceBishop extends ChessPiece{
 		
 		
 		return possibleMoves;
-	}
+	}*/
 }

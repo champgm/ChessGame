@@ -11,6 +11,14 @@ public class PieceRook extends ChessPiece{
 	Vector<ChessSquare> calcPossibleMoves() {
 		System.out.println("Rook: Calculating possible moves from "+xPos+","+yPos);
 		Vector<ChessSquare> possibleMoves=new Vector<ChessSquare>();
+		possibleMoves=calculateRookTypeMovement();
+		return possibleMoves;
+	}
+	/*
+	@Override
+	Vector<ChessSquare> calcPossibleMoves() {
+		System.out.println("Rook: Calculating possible moves from "+xPos+","+yPos);
+		Vector<ChessSquare> possibleMoves=new Vector<ChessSquare>();
 		//greater horizontal
 		for(int i=xPos+1;i<8;i++){
 			int x=i;
@@ -73,4 +81,5 @@ public class PieceRook extends ChessPiece{
 		}
 		return possibleMoves;
 	}
+	*/
 }
